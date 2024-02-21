@@ -1,6 +1,7 @@
 function loginWithKakao() {
     Kakao.Auth.authorize({
-      redirectUri: 'https://main--foodlistshare.netlify.app/',
+      // redirectUri: 'http://localhost:3000',
+      redirectUri: 'https://main--foodlistshare.netlify.app',
       state: 'userme',
     });
   }
