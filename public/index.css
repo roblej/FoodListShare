@@ -132,7 +132,7 @@
     width: 300px;
     height: 600px;
     background-color: #F5F5F5;
-    border:1px solid salmon;
+    box-shadow: 1px 1px;
     transition: .5s;
     border-radius: 15px;
     top:50px;
@@ -167,14 +167,14 @@
     text-align: center;
 }
 .friendFoodList .foodlist{
-    background-color: ivory;
+    background-color: #F5F5F5;
     width: 300px;
     height: 500px;
     position: relative;
     display: flex;
     top: -270px;
     right: 350px;
-    border: 1px solid black;
+    box-shadow: 1px 1px;
     border-radius: 15px;
     opacity: 0;
     transition: .7s;
