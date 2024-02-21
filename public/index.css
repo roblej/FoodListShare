@@ -96,7 +96,7 @@
     position: absolute;
     width: 300px;
     height: 600px;
-    background-color: ivory;
+    background-color: #F5F5F5;
     border:1px solid salmon;
     transition: .5s;
     border-radius: 15px;
