@@ -21,6 +21,7 @@
     left: 368px;
     top:520px;
     cursor: pointer;
+    box-shadow: 1px 1px 1px;
 }
 .left .toggle .material-symbols-outlined{
     position: absolute;
