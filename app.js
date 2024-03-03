@@ -1,17 +1,18 @@
 const express = require("express");
 const mysql = require('mysql2');
 const app = express();
+require('dotenv').config();
 const port = 3000;
 
 app.use(express.static(__dirname+'/public'))
 app.use(express.static(__dirname+'/src'))
 
 const connection = mysql.createConnection({
-  host     : '121.176.72.100',
-  user     : 'ten',
-  password : 'jang1012',
-  port : 3307,
-  database : 'FoodListShare'
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
 });
 
 connection.connect();

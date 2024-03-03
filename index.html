@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script defer src="./src/location.js"></script>
-    <script defer src ="./src/login.js"></script>
-    <script defer src ="./src/func.js"></script>
-    <link rel="stylesheet" href="./public/index.css">
+    <script defer src="location.js"></script>
+    <script defer src ="login.js"></script>
+    <script defer src ="func.js"></script>
+    <link rel="stylesheet" href="./index.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7ab1fd4f891be706a889bd784ebd7328&libraries=services"></script>
     <!-- <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> -->
@@ -36,10 +36,10 @@
         <div class="map_wrap">
         <div id="map">
             <div class="navigate">
-                <div class="navigate btn"><a id="kakao-login-btn" href="javascript:loginWithKakao()" >로그인</a></div>
+                <div class="navigate btn" id="kakao-login-btn"><a href="javascript:loginWithKakao()" >로그인</a></div>
                   <p id="token-result"></p>
                   <!-- <button class="api-btn" onclick="requestUserInfo()" style="visibility:hidden">사용자 정보 가져오기</button> -->
-                <!-- <div class="logout_btn navigate btn">로그아웃</div> -->
+                <div class="navigate btn" id="logout_btn">로그아웃</div>
                 <div class="add_friend_btn navigate btn">친구추가</div>
                 <div class="friendlist_btn navigate btn" onclick="toggleFriendFoodList()">친구목록</div>
                 <div class="friendFoodList">
@@ -53,7 +53,7 @@
                         <div class="foodlist">
                             <div>장원갑칼국수 세종본점</div>
                             <br>
-                            <div>신안골 분식</div>
+                            <!-- <div>신안골 분식</div> -->
                             <div></div>
                             <br>
                             <div></div>

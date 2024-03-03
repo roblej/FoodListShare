@@ -47,9 +47,9 @@ function fetchFoodList() {
   }
   
   // 페이지 로드 시 foodlist 데이터를 가져오도록 설정
-//   document.addEventListener('DOMContentLoaded', fetchFoodList);
+  document.addEventListener('DOMContentLoaded', fetchFoodList);
   
-//   document.body.appendChild('whoRec');
-//   targetElement.style.position = 'fixed';
-//   targetElement.style.zIndex = '9999';
+  document.body.appendChild('whoRec');
+  targetElement.style.position = 'fixed';
+  targetElement.style.zIndex = '9999';
   
