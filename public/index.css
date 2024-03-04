@@ -11,6 +11,25 @@
     transition: 0.7s;
 
 }
+.left .mylist_btn{
+    z-index: 1;
+    position: relative;
+    width: 70px;
+    left: 375px;
+    top:7px;
+}
+.left .mylist{
+    background-color: white;
+    width : 300px;
+    height: 400px;
+    position: absolute;
+    top: 50px;
+    left: 375px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: none;
+    opacity: 0;
+}
 .left .toggle{
     background-color:white;
     border-radius: 0 8px 8px 0;
@@ -113,6 +132,7 @@
     background-color: #FFFFFF;
     transition: 0.7s;
     box-shadow: 1px 1px;
+    cursor: pointer;
 }
 .btn:hover{
     background-color: grey;
@@ -135,6 +155,17 @@
 }
 
 .logout_btn{
+    display: none;
+}
+#addFriendModal{
+    position: absolute;
+    top:70px;
+    right: 50px;
+    background-color: white;
+    padding: 20px 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    opacity: 0;
     display: none;
 }
 .friendlist_btn:active{
@@ -163,7 +194,8 @@
     /* float: right; */
     margin: 10px auto;
     width: 100% ;
-    height: 100%;
+    height: 300px;
+    overflow-y: scroll;
 }
 .friendFoodList .inner .name{
     border: 1px solid black;
@@ -196,9 +228,9 @@
     /* display: flex; */
     display: table-cell;
     /* vertical-align: middle; */
-    top: -270px;
+    top: -341px;
     justify-content: center;
-    right: 315px;
+    right: 355px;
     box-shadow: 1px 1px;
     border-radius: 15px;
     opacity: 0;

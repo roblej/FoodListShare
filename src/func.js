@@ -1,70 +1,50 @@
-function toggleFriendFoodList() {
-    var friendFoodList = document.querySelector('.friendFoodList');
-    friendFoodList.style.opacity = (friendFoodList.style.opacity === '1') ? '0' : '1';
-    friendFoodList.style.display = (friendFoodList.style.display === 'block') ? 'none' : 'block';
-}
-function toggleFoodList() {
-    var foodList = document.querySelector('.foodlist');
-    foodList.style.opacity = (foodList.style.opacity === '1') ? '0' : '1';
-    // foodList.style.display = (foodList.style.display === 'block') ? 'none' : 'block';
-}
-document.querySelector('.left .toggle').addEventListener('click', function() {
-    var leftElement = document.querySelector('.left');
-    // .left 요소의 현재 left 값 확인
-    var leftValue = leftElement.style.left;
-
-    // left 값이 0px이면 -377px로, 아니면 0px로 설정
-    if (leftValue === '0px' || leftValue === '') { // 초기 상태 또는 0px인 경우
-        leftElement.style.left = '-377px';
-    } else {
-        leftElement.style.left = '0px';
+function addStore(mystore){
+    fetch(`/addStore?store=${mystore}`)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('네트워크 상태가 좋지 않습니다.');
     }
-});
-
-document.querySelector('.toggle').addEventListener('click', function() {
-    var icon = this.querySelector('.material-symbols-outlined');
-    icon.classList.toggle('rotate-icon'); // 클래스 토글로 아이콘 회전 토글
-});
-
-// 데이터베이스 연동해서 친구의 목록 가져오기
-function fetchFoodList() {
-    fetch('/foodlist')
-      .then(response => response.json())
-      .then(data => {
-        const foodListDiv = document.querySelector('.foodlist');
-        foodListDiv.innerHTML = ''; // 기존 내용을 비웁니다.
-  
-        data.forEach(item => {
-          const div = document.createElement('div');
-          div.textContent = item.name; // 가정: 데이터베이스에서 가져온 항목의 이름 필드
-          foodListDiv.appendChild(div);
-  
-          const br = document.createElement('br'); // 새로운 br 요소 생성
-          foodListDiv.appendChild(br); // div 요소 뒤에 br 요소 추가
-
-          // 각 div에 클릭 이벤트 추가
-          div.addEventListener('click', function() {
-              // 클릭된 div의 텍스트를 가져와서 input 요소에 할당
-              document.getElementById("keyword").value = this.textContent;
-              // 폼을 자동으로 제출
-              document.querySelector('#searchForm button[type="submit"]').click();
-          });
-        });
-      })
-      .catch(error => console.error('Error:', error));
+    return response.json();
+  })
+  .then(data => {
+    if (data.message) {
+      // 서버에서 전달된 메시지가 있는 경우, 콘솔에 로그를 출력하거나 사용자에게 알림
+      console.log(data.message);
+      alert(data.message); // 이 경우 "이미 추가된 맛집입니다."가 사용자에게 보여집니다.
+    } else {
+      console.log("success");
+    }
+  })
+  .catch(error => {
+    console.error('에러:', error);
+    alert('맛집리스트 추가에 실패했습니다.');
+  });
 }
 
-  
-  // 페이지 로드 시 foodlist 데이터를 가져오도록 설정
-  document.addEventListener('DOMContentLoaded', fetchFoodList);
-  
-  document.body.appendChild('whoRec');
-  targetElement.style.position = 'fixed';
-  targetElement.style.zIndex = '9999';
-  
-  // 클릭 이벤트 리스너 추가
-document.getElementById("restaurantName").addEventListener("click", function() {
-// 클릭한 div의 텍스트 값을 가져와서 input 요소에 할당
-document.getElementById("keyword").value = this.textContent;
-console.log("test")
-});
+
+function toggleMylist() {
+    fetchmylist();
+    var mylist = document.querySelector('.mylist');
+    mylist.style.opacity = (mylist.style.opacity === '1') ? '0' : '1';
+    mylist.style.display = (mylist.style.display === 'block') ? 'none' : 'block';
+}
+
+function fetchmylist() {
+    fetch(`/showmylist`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const myListDiv = document.querySelector('.mylist .inner');
+        myListDiv.innerHTML = ''; // 기존 내용을 비웁니다.
+
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.textContent = item.name; // 가정: 데이터베이스에서 가져온 항목의 이름 필드
+            myListDiv.appendChild(div);
+
+            const br = document.createElement('br'); // 새로운 br 요소 생성
+            myListDiv.appendChild(br); // div 요소 뒤에 br 요소 추가
+        });
+    })
+    .catch(error => console.error('Error:', error));
+}

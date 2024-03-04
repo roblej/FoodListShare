@@ -120,8 +120,9 @@ function getListItem(index, places) {
 
     var el = document.createElement('li'),
     itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
-                '<div class="info">' + '<div class="recommended">추천</div><div class ="whoRec"></div>'+
-                '   <h5>' + places.place_name + '</h5>';
+    '<div class="info">' + '<div class="recommended" onclick="addStore(\'' + places.place_name + '\')">추천</div><div class ="whoRec"></div>' +
+    '   <h5>' + places.place_name + '</h5>';
+
 
     if (places.road_address_name) {
         itemStr += '    <span>' + places.road_address_name + '</span>' +
