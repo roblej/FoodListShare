@@ -1,47 +1,74 @@
 function loginWithKakao() {
-    Kakao.Auth.authorize({
-      redirectUri: 'http://localhost:3000',
-      state: 'userme',
-    });
+  Kakao.Auth.authorize({
+    redirectUri: 'http://localhost:3000',
+    // redirectUri: 'https://main--foodlistshare.netlify.app',
+    state: 'userme',
+  });
+}
+
+  // 아래는 데모를 위한 UI 코드입니다.
+  function displayToken() {
+    var token = getCookie('authorize-access-token');
+
+    if(token) {
+      Kakao.Auth.setAccessToken(token);
+      Kakao.Auth.getStatusInfo()
+        .then(function(res) {
+          if (res.status === 'connected') {
+            document.getElementById('token-result').innerText
+              = 'login success, token: ' + Kakao.Auth.getAccessToken();
+              console.log("success")
+          }else{
+            console.log("failed")
+          }
+          
+        })
+        .catch(function(err) {
+          Kakao.Auth.setAccessToken(null);
+        });
+    }
+    else{
+      console.log("asd")
+    }
   }
-  
-  // URL에서 인가 코드를 추출하고 로그인 여부를 판단하는 함수
-  function getAuthorizationCodeAndDisplayUI() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    const state = urlParams.get('state');
-  
-    if (code && state === 'userme') {
-      console.log('인가 코드:', code);
-      // 인가 코드가 있을 경우 UI 업데이트
-      document.getElementById('token-result').innerText = 'login success, code: ' + code;
-      document.getElementById('kakao-login-btn').style.display = 'none';
-      document.getElementById('token-result').style.display = 'none';
-      document.getElementById('logout_btn').style.display = 'inline';
-      document.querySelector('button.api-btn').style.visibility = 'visible';
-      
-      // 서버에 인가 코드를 전송하여 액세스 토큰 요청 (이 부분은 서버 측 코드 필요)
-      // requestAccessToken(code);
-    } else {
-      console.log('인가 코드가 없거나 상태 값이 일치하지 않습니다.');
-      document.getElementById('kakao-login-btn').style.display = 'block';
+
+  function getCookie(name) {
+    var cookies = document.cookie.split('; ');
+    for (var i = 0; i < cookies.length; i++) {
+      var part = cookies[i].split('=');
+      if (part[0] === name) {
+        return part[1];
+      }
     }
   }
   
-  // 페이지 로딩 시 인가 코드 확인 및 UI 업데이트
-  getAuthorizationCodeAndDisplayUI();
+
+  
+  // 통합된 함수 호출
+  displayToken();
   
   function requestUserInfo() {
-    // 사용자 정보 요청 로직 (액세스 토큰 필요)
+    Kakao.API.request({
+      url: '/v2/user/me',
+    })
+      .then(function(res) {
+        alert(JSON.stringify(res));
+      })
+      .catch(function(err) {
+        alert(
+          'failed to request user information: ' + JSON.stringify(err)
+        );
+      });
   }
-  
-  Kakao.Auth.logout()
-  .then(function(response) {
-    console.log(Kakao.Auth.getAccessToken()); // null
-  })
-  .catch(function(error) {
-    console.log('Not logged in.');
-  });
+
+
+  // Kakao.Auth.logout()
+  // .then(function(response) {
+  //   console.log(Kakao.Auth.getAccessToken()); // null
+  // })
+  // .catch(function(error) {
+  //   console.log('Not logged in.');
+  // });
   
   document.addEventListener('DOMContentLoaded', function() {
     // 로그아웃 버튼에 대한 참조를 가져옵니다.
@@ -51,6 +78,7 @@ function loginWithKakao() {
     if (logoutBtn) {
       // 로그아웃 버튼에 클릭 이벤트 리스너를 추가합니다.
       logoutBtn.addEventListener('click', function() {
+        console.log("logout message")
         // 카카오 로그아웃 함수를 호출합니다.
         Kakao.Auth.logout().then(function(response) {
           console.log(Kakao.Auth.getAccessToken()); // null이 출력되어야 합니다.
@@ -64,4 +92,3 @@ function loginWithKakao() {
       });
     }
   });
-  

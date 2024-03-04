@@ -41,10 +41,19 @@ function fetchFoodList() {
   
           const br = document.createElement('br'); // 새로운 br 요소 생성
           foodListDiv.appendChild(br); // div 요소 뒤에 br 요소 추가
+
+          // 각 div에 클릭 이벤트 추가
+          div.addEventListener('click', function() {
+              // 클릭된 div의 텍스트를 가져와서 input 요소에 할당
+              document.getElementById("keyword").value = this.textContent;
+              // 폼을 자동으로 제출
+              document.querySelector('#searchForm button[type="submit"]').click();
+          });
         });
       })
       .catch(error => console.error('Error:', error));
-  }
+}
+
   
   // 페이지 로드 시 foodlist 데이터를 가져오도록 설정
   document.addEventListener('DOMContentLoaded', fetchFoodList);
@@ -53,3 +62,9 @@ function fetchFoodList() {
   targetElement.style.position = 'fixed';
   targetElement.style.zIndex = '9999';
   
+  // 클릭 이벤트 리스너 추가
+document.getElementById("restaurantName").addEventListener("click", function() {
+// 클릭한 div의 텍스트 값을 가져와서 input 요소에 할당
+document.getElementById("keyword").value = this.textContent;
+console.log("test")
+});

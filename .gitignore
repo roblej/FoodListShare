@@ -1,5 +1,7 @@
 node_modules
 .env
-package-lock.json
 src/db.js
 src/login__.js
+.vscode
+src/login3.js
+package-lock.json

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script defer src="location.js"></script>
-    <script defer src ="login.js"></script>
-    <script defer src ="func.js"></script>
-    <link rel="stylesheet" href="./index.css">
+    <script defer src="src/location.js"></script>
+    <script defer src ="src/login2.js"></script>
+    <script defer src ="src/func.js"></script>
+    <link rel="stylesheet" href="public/index.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7ab1fd4f891be706a889bd784ebd7328&libraries=services"></script>
     <!-- <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> -->
@@ -22,8 +22,8 @@
             </span></div>
         <div class="bg_white" id="menu_wrap">
             <div class="option">
-            <form onsubmit="searchPlaces(); return false;">
-                키워드 : <input type="text" value="조치원 맛집" id="keyword" size="15"> 
+            <form id="searchForm" onsubmit="searchPlaces(); return false;">
+                키워드 : <input type="text" id="keyword" value="조치원 맛집" id="keyword" size="15"> 
                 <button type="submit">검색하기</button> 
             </form>
         </div>
@@ -39,6 +39,7 @@
                 <div class="navigate btn" id="kakao-login-btn"><a href="javascript:loginWithKakao()" >로그인</a></div>
                   <p id="token-result"></p>
                   <!-- <button class="api-btn" onclick="requestUserInfo()" style="visibility:hidden">사용자 정보 가져오기</button> -->
+                  <!-- <div class="navigate btn" id="loginButton">로그인</div> -->
                 <div class="navigate btn" id="logout_btn">로그아웃</div>
                 <div class="add_friend_btn navigate btn">친구추가</div>
                 <div class="friendlist_btn navigate btn" onclick="toggleFriendFoodList()">친구목록</div>
@@ -72,5 +73,21 @@
         <div id="clickLatlng"></div>
     </div>
     </section>
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>로그인</h2>
+            <form id="loginForm">
+                <label for="username">아이디 : </label>
+                <input type="text" id="username" name="username">
+                <br>
+                <label for="password">비밀번호 : </label>
+                <input type="password" id="password" name="password">
+                <br>
+                <button type="submit">로그인</button>
+            </form>
+            <p id="loginError" style="color: red; display: none;">아이디 또는 비밀번호가 잘못되었습니다.</p>
+        </div>
+    </div>
 </body>
 </html>
